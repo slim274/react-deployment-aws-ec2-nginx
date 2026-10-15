@@ -42,13 +42,11 @@ This repository documents my **DevOps Micro Internship (DMI) Cohort 2 — Week 2
 
 The React demo displayed my name and the deployment date in the browser. The application was built into Vite's `dist/` directory and copied to the Nginx web root.
 
-![React application running through Nginx](screenshots/05-live-react-app.png)
-
 ## 1. Application deployment
 
 ### Source and app customization
 
-I cloned my GitHub repository to the EC2 instance and worked in its `react-assignment` project directory.
+For the original January 2026 lab, I cloned my earlier GitHub repository to the EC2 instance and worked in its `react-assignment` project directory. This portfolio repository documents that deployment and the subsequent operations drill.
 
 ```bash
 git clone https://github.com/slim274/React--DevOp.git
@@ -56,6 +54,14 @@ cd React--DevOp/react-assignment
 ```
 
 I edited `src/App.jsx` to display my name and the date (**23-01-2026**), confirming that the deployed page used my customized React component.
+
+**Evidence — repository cloned to EC2:**
+
+![Git repository cloned on the EC2 server](screenshots/01-source-repository-clone.png)
+
+**Evidence — React component customized:**
+
+![React component customization](screenshots/02-react-component-customization.png)
 
 ### Build and publish through Nginx
 
@@ -70,6 +76,10 @@ sudo systemctl restart nginx
 
 The Vite output shows **37 modules transformed** and a completed production build. The `dist/` folder contained `index.html` and an `assets/` directory.
 
+**Evidence — successful Vite production build:**
+
+![Vite build output and dist files](screenshots/03-vite-production-build.png)
+
 I then validated and checked the Nginx service:
 
 ```bash
@@ -80,7 +90,13 @@ sudo systemctl status nginx
 
 Nginx reported that its configuration test was successful and the service was **active (running)**. Opening the EC2 public HTTP address in a browser displayed the React application.
 
-**Deployment evidence:** [Git clone](screenshots/01-source-repository-clone.png) · [Customized component](screenshots/02-react-component-customization.png) · [Vite build](screenshots/03-vite-production-build.png) · [Nginx running](screenshots/04-nginx-validation-and-status.png)
+**Evidence — Nginx validation and service status:**
+
+![Nginx configuration validation and running service](screenshots/04-nginx-validation-and-status.png)
+
+**Evidence — deployed React application accessible in the browser:**
+
+![React application running through Nginx](screenshots/05-live-react-app.png)
 
 ## 2. Network and server operations checks
 
@@ -100,7 +116,19 @@ After the deployment, I performed a structured Linux operations drill to verify 
 
 > **Security note:** The screenshot explicitly shows **UFW was inactive**. I documented that finding rather than claiming the instance had an enabled host firewall. This was an HTTP lab deployment; production hardening would require appropriate AWS security-group restrictions, host firewall policy as needed, HTTPS/TLS and ongoing maintenance.
 
-**Operations evidence:** [Routing and connectivity](screenshots/06-network-routing-and-ping.png) · [Open ports](screenshots/07-listening-ports-and-processes.png) · [UFW status](screenshots/08-firewall-status.png)
+### Network and server evidence
+
+**Network routing, DNS and connectivity:**
+
+![Network routing and connectivity verification](screenshots/06-network-routing-and-ping.png)
+
+**Listening ports and processes:**
+
+![Nginx and SSH listening ports](screenshots/07-listening-ports-and-processes.png)
+
+**UFW firewall status:**
+
+![UFW firewall status during the lab](screenshots/08-firewall-status.png)
 
 ## 3. Nginx SPA routing validation
 
@@ -137,7 +165,13 @@ I deliberately introduced a syntax error into the Nginx site configuration to pr
 
 This drill demonstrated configuration validation, error interpretation and controlled recovery without relying on trial-and-error restarts.
 
-**Incident evidence:** [Configuration failure and successful retest](screenshots/10-incident-detection-and-fix.png) · [Service recovered](screenshots/11-service-recovery.png)
+**Evidence — deliberate configuration failure and successful validation after correction:**
+
+![Nginx configuration error and fix](screenshots/10-incident-detection-and-fix.png)
+
+**Evidence — Nginx service restored:**
+
+![Nginx service recovered](screenshots/11-service-recovery.png)
 
 ## Result
 
@@ -153,7 +187,7 @@ This drill demonstrated configuration validation, error interpretation and contr
 
 ## Repository notes
 
-- The React application source is in the **`react-assignment/`** folder of the original repository used during the lab.
+- During the lab, I worked in a directory called `react-assignment`. In this GitHub repository, the React source is stored at the repository root.
 - The `screenshots/` folder contains selected evidence extracted from my Week 2 assignment report.
 - The public IP and service status shown in January 2026 screenshots represent the **historical lab**, not a guarantee that the instance is currently running.
 - This project did **not** demonstrate Terraform, Docker, CI/CD, HTTPS configuration or a fully hardened production environment; those are possible future improvements.
